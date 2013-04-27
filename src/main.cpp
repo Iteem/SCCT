@@ -1,9 +1,19 @@
 #include <SFML/Graphics.hpp>
 
+#include "Resources.hpp"
+
+const sf::Vector2u windowSize( 800, 600 );
+
 int main( int argc, char **argv )
 {
-	sf::RenderWindow app( sf::VideoMode( 800, 600, 32), "SCCT" );
+	sf::RenderWindow app( sf::VideoMode( windowSize.x, windowSize.y , 32 ), "SCCT" );
 	app.setVerticalSyncEnabled( true );
+
+	scct::ResourceManager<sf::Texture> rm;
+
+	sf::Sprite sprite( *rm.get( scct::fromFile<sf::Texture>( "testsfml.png" ) ) );
+	sprite.setOrigin( static_cast< sf::Vector2f >( sprite.getTexture()->getSize() ) / 2.f );
+	sprite.setPosition( static_cast<sf::Vector2f>( windowSize ) / 2.f );
 
 	while( app.isOpen() ){
 		sf::Event event;
@@ -14,6 +24,8 @@ int main( int argc, char **argv )
 		}
 
 		app.clear();
+
+		app.draw( sprite );
 
 		app.display();
 	}
