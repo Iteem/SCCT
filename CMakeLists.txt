@@ -13,6 +13,7 @@ set( SRC_DIR "${PROJECT_SOURCE_DIR}/src/" )
 set(
 	SOURCES
 	${SRC_DIR}/main.cpp
+	${SRC_DIR}/NonCopyable.hpp
 )
 
 add_executable( ${PROJECT_NAME} ${SOURCES})
