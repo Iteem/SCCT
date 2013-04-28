@@ -16,7 +16,7 @@ int main( int argc, char **argv )
 
 	scct::ResourceManager<sf::Texture> rm;
 
-	sf::Sprite sprite( *rm.get( scct::fromFile<sf::Texture>( "testsfml.png" ) ) );
+	sf::Sprite sprite( *rm.get( scct::fromFile<sf::Texture>( "data/testsfml.png" ) ) );
 	sprite.setOrigin( static_cast< sf::Vector2f >( sprite.getTexture()->getSize() ) / 2.f );
 	sprite.setPosition( static_cast<sf::Vector2f>( windowSize ) / 2.f );
 

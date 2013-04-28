@@ -1,30 +1,22 @@
 cmake_minimum_required( VERSION 2.8 )
 
 # Replace SCCT with the name of your project
-set( PROJECT_NAME "SCCT" )
+project( SCCT )
 
-project( ${PROJECT_NAME} )
+# SFML
+set( CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/CMake ${CMAKE_MODULE_PATH}" )
+find_package( SFML 2 REQUIRED system window graphics network audio )
+include_directories( ${SFML_INCLUDE} )
 
-find_package( SFML 2.0 QUIET COMPONENTS GRAPHICS WINDOW SYSTEM )
+# Source files
+file( GLOB_RECURSE SOURCES "${PROJECT_SOURCE_DIR}/src/*" )
 
-set( SRC_DIR "${PROJECT_SOURCE_DIR}/src/" )
-
-# Add sources here
-set(
-	SOURCES
-	${SRC_DIR}/main.cpp
-	${SRC_DIR}/NonCopyable.hpp
-	${SRC_DIR}/Resources.hpp
-	${SRC_DIR}/Resources/Loaders.hpp
-	${SRC_DIR}/Resources/ResourceKey.hpp
-	${SRC_DIR}/Resources/ResourceKey.inl
-	${SRC_DIR}/Resources/ResourceManager.hpp
-	${SRC_DIR}/Resources/ResourceManager.inl
-)
-
-if(CMAKE_COMPILER_IS_GNUCXX)
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
+# GCC
+if( CMAKE_COMPILER_IS_GNUCXX )
+	set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x -Wall" )
 endif()
 
-add_executable( ${PROJECT_NAME} ${SOURCES})
-target_link_libraries( ${PROJECT_NAME} ${SFML_NETWORK_LIBRARY} ${SFML_AUDIO_LIBRARY} ${SFML_GRAPHICS_LIBRARY} ${SFML_WINDOW_LIBRARY} ${SFML_SYSTEM_LIBRARY} )
+set( CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR} )
+
+add_executable( ${CMAKE_PROJECT_NAME} ${SOURCES})
+target_link_libraries( ${CMAKE_PROJECT_NAME} ${SFML_LIBRARIES} )

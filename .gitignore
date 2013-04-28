@@ -12,7 +12,5 @@
 *.la
 *.a
 
-# CMake
-CMakeCache.txt
-CMakeFiles/
-cmake_install.cmake
+build/
+SCCT
