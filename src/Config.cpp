@@ -140,8 +140,9 @@ bool Config::saveToFile( const std::string &path ) const
 	return true;
 }
 
-std::string Config::getStringValue(const std::string &key) const
+std::string Config::getStringValue( std::string key ) const
 {
+	std::transform( key.begin(), key.end(), key.begin(), tolower );
     std::map<std::string, std::string>::const_iterator it = m_map.find( key );
     if( it == m_map.end() ){
         std::cerr << "Warning: Value of " << key << " requested but not set." << std::endl;
@@ -152,8 +153,9 @@ std::string Config::getStringValue(const std::string &key) const
     }
 }
 
-void Config::setStringValue(const std::string &key, const std::string &value)
+void Config::setStringValue( std::string key, const std::string &value )
 {
+	std::transform( key.begin(), key.end(), key.begin(), tolower );
 	m_map[key] = value;
 }
 

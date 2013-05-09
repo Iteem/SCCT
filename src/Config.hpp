@@ -27,9 +27,9 @@ class Config : public NonCopyable
 
         bool saveToFile( const std::string &path ) const;
 
-        std::string getStringValue( const std::string &key ) const;
+        std::string getStringValue( std::string key ) const;
 
-		void setStringValue( const std::string &key, const std::string &value );
+		void setStringValue( std::string key, const std::string &value );
 
         // returns value converted to type T
 		template<typename T>
